@@ -169,6 +169,92 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://georgeguoxv.gitee.io/2022/01/25/%E5%AE%89%E5%8D%93%E9%80%86%E5%90%91%E4%B8%80%E6%AC%BE%E5%8F%98%E5%A3%B0%E5%99%A8%EF%BC%8Cfrida%E9%A6%96%E6%88%98%E5%A4%A7%E6%8D%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon-32x32.png">
+      <meta itemprop="name" content="George Guo">
+      <meta itemprop="description" content="本博客为纯静态网站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="George的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/25/%E5%AE%89%E5%8D%93%E9%80%86%E5%90%91%E4%B8%80%E6%AC%BE%E5%8F%98%E5%A3%B0%E5%99%A8%EF%BC%8Cfrida%E9%A6%96%E6%88%98%E5%A4%A7%E6%8D%B7/" class="post-title-link" itemprop="url">安卓逆向一款变声器，frida首战告捷</a>
+        </h2>
+
+        <div class="post-meta">
+
+  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-01-25 23:27:09" itemprop="dateCreated datePublished" datetime="2022-01-25T23:27:09+08:00">2022-01-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-26 00:08:04" itemprop="dateModified" datetime="2022-01-26T00:08:04+08:00">2022-01-26</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="得来全不费工夫"><a class="header-anchor" href="#得来全不费工夫">¶</a>得来全不费工夫</h2>
+<p>在了解firda之前，我曾经接触过xposed，当时也是对这样的东西存在感到十分吃惊，Reverse Engineer的学习道路上，必不可少各种各样的工具。这些前辈们给我们留下的工具是我们工作的基础。如果说安卓应用和windows应用原本就像一个黑盒子，我们无法窥探它内部的工作，而frida和Ollydbug这些工具，就是我们打开黑盒面纱的钥匙。</p>
+<h2 id="我们要实现的功能"><a class="header-anchor" href="#我们要实现的功能">¶</a>我们要实现的功能:</h2>
+<p>破解vip才能使用的变声功能</p>
+<p>付费语音包的使用</p>
+<h2 id="Jadx反编译，窥探APP源码，定位关键类"><a class="header-anchor" href="#Jadx反编译，窥探APP源码，定位关键类">¶</a>Jadx反编译，窥探APP源码，定位关键类</h2>
+<p>通过jadx反编译，找到应用包名，在Mainactivity里搜索关键词VIP，就找到了关键函数<code>gotoBuyVIPUI</code></p>
+<p><img src="/2022/01/25/%E5%AE%89%E5%8D%93%E9%80%86%E5%90%91%E4%B8%80%E6%AC%BE%E5%8F%98%E5%A3%B0%E5%99%A8%EF%BC%8Cfrida%E9%A6%96%E6%88%98%E5%A4%A7%E6%8D%B7/D:%5C%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%5Cblog%5Csource%5C_posts%5C%E5%AE%89%E5%8D%93%E9%80%86%E5%90%91%E4%B8%80%E6%AC%BE%E5%8F%98%E5%A3%B0%E5%99%A8%EF%BC%8Cfrida%E9%A6%96%E6%88%98%E5%A4%A7%E6%8D%B7%5Cimage-20220125234730911.png" alt="image-20220125234730911"></p>
+<h2 id="IntelliJ-smalidea-插件，动态调试APP"><a class="header-anchor" href="#IntelliJ-smalidea-插件，动态调试APP">¶</a>IntelliJ smalidea 插件，动态调试APP</h2>
+<p>用Android killer 拆apk后，用IntelliJ打开项目。找到我们之前找到关键函数，在这下断点</p>
+<p><img src="/2022/01/25/%E5%AE%89%E5%8D%93%E9%80%86%E5%90%91%E4%B8%80%E6%AC%BE%E5%8F%98%E5%A3%B0%E5%99%A8%EF%BC%8Cfrida%E9%A6%96%E6%88%98%E5%A4%A7%E6%8D%B7/D:%5C%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%5Cblog%5Csource%5C_posts%5C%E5%AE%89%E5%8D%93%E9%80%86%E5%90%91%E4%B8%80%E6%AC%BE%E5%8F%98%E5%A3%B0%E5%99%A8%EF%BC%8Cfrida%E9%A6%96%E6%88%98%E5%A4%A7%E6%8D%B7%5Cimage-20220125235703838.png" alt="image-20220125235703838"></p>
+<p>在APP上点击一个付费VIP才能使用的语音包，果然，在断点处停了下来。说明我们找对地方了，这个就是检测是否VIP的函数</p>
+<h2 id="改写APKsamli代码或者frida动态hook，实现vip功能的使用"><a class="header-anchor" href="#改写APKsamli代码或者frida动态hook，实现vip功能的使用">¶</a>改写APKsamli代码或者frida动态hook，实现vip功能的使用</h2>
+<p>由于对samli语法不熟悉，经过一番尝试无果</p>
+<p>我选择简单粗暴的frida</p>
+<p>以下为python注入代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> frida, sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_message</span>(<span class="params">message, data</span>):</span><span class="comment">#控制台打印</span></span><br><span class="line">    <span class="keyword">if</span> message[<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;send&#x27;</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;[*] &#123;0&#125;&quot;</span>.<span class="built_in">format</span>(message[<span class="string">&#x27;payload&#x27;</span>]))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(message)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;weiyin.js&#x27;</span>, <span class="string">&#x27;r&#x27;</span>, encoding=<span class="string">&#x27;UTF-8&#x27;</span>) <span class="keyword">as</span> file:<span class="comment">#打开js脚本文件</span></span><br><span class="line">    result = file.read()</span><br><span class="line">    jscode = result</span><br><span class="line"></span><br><span class="line">process = frida.get_usb_device(<span class="number">1</span>).attach(<span class="string">&#x27;com.bsqrj.numfirst&#x27;</span>)</span><br><span class="line">script = process.create_script(jscode)</span><br><span class="line">script.on(<span class="string">&#x27;message&#x27;</span>, on_message)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;[*] Running CTF&#x27;</span>)</span><br><span class="line">script.load()</span><br><span class="line"></span><br><span class="line">sys.stdin.read()</span><br></pre></td></tr></table></figure>
+<p>以下为weiyin.js 的脚本代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Java.perform(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">Java.use(<span class="string">&#x27;com.xmb.voicechange.db.LocalCache&#x27;</span>).isVIP.overload(<span class="string">&#x27;android.content.Context&#x27;</span>).implementation=<span class="function"><span class="keyword">function</span>(<span class="params">v</span>)</span>&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">true</span>&#125;</span><br><span class="line">   &#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="注入脚本后，即可愉快使用vip功能，不过缺点是每次重启app后，都要重新注入，可惜不会samli语法啊"><a class="header-anchor" href="#注入脚本后，即可愉快使用vip功能，不过缺点是每次重启app后，都要重新注入，可惜不会samli语法啊">¶</a>注入脚本后，即可愉快使用vip功能，不过缺点是每次重启app后，都要重新注入，可惜不会samli语法啊</h2>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://georgeguoxv.gitee.io/2021/04/03/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86%E5%92%8C%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -202,7 +288,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-22 20:44:03" itemprop="dateModified" datetime="2021-12-22T20:44:03+08:00">2021-12-22</time>
+                <time title="修改时间：2021-12-22 21:04:39" itemprop="dateModified" datetime="2021-12-22T21:04:39+08:00">2021-12-22</time>
               </span>
 
           
@@ -216,45 +302,69 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="取模的定义"><a href="#取模的定义" class="headerlink" title="取模的定义"></a>取模的定义</h3><p><strong>模除</strong>（又稱<strong>模数</strong>、<strong>取模操作</strong>、<strong>取模運算</strong>等，英語：modulo 有时也称作 modulus）得到的是一个数除以另一个数的余数。</p>
-<p>给定两个正整数：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/被除數">被除数</a> <em>a</em> 和<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/除數">除数</a> <em>n</em>，<em>a</em> modulo <em>n</em> (缩写为 <em>a</em> mod <em>n</em>)得到的是使用<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/欧几里德除法">欧几里德除法</a>时 <em>a</em>/<em>n</em> 的余数。</p>
-<h3 id="取模的性质"><a href="#取模的性质" class="headerlink" title="取模的性质"></a>取模的性质</h3><p>对于正整数a,k,m,n，如果有 a = m (mod n),那么a * k = m * k (mod n)</p>
-<h3 id="费马小定理的证明"><a href="#费马小定理的证明" class="headerlink" title="费马小定理的证明"></a>费马小定理的证明</h3><h4 id="举例证明"><a href="#举例证明" class="headerlink" title="举例证明"></a>举例证明</h4><p>如果p是一个素数（质数），a是一个正整数且与p的最大公因数为1，那么对于数列：</p>
+          <h3 id="取模的定义"><a class="header-anchor" href="#取模的定义">¶</a>取模的定义</h3>
+<p><strong>模除</strong>（又稱<strong>模数</strong>、<strong>取模操作</strong>、<strong>取模運算</strong>等，英語：modulo 有时也称作 modulus）得到的是一个数除以另一个数的余数。</p>
+<p>给定两个正整数：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%A2%AB%E9%99%A4%E6%95%B8">被除数</a> <em>a</em> 和<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%99%A4%E6%95%B8">除数</a> <em>n</em>，<em>a</em> modulo <em>n</em> (缩写为 <em>a</em> mod <em>n</em>)得到的是使用<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%B7%E9%99%A4%E6%B3%95">欧几里德除法</a>时 <em>a</em>/<em>n</em> 的余数。</p>
+<h3 id="取模的性质"><a class="header-anchor" href="#取模的性质">¶</a>取模的性质</h3>
+<p>对于正整数a,k,m,n，如果有 a = m (mod n),那么a * k = m * k (mod n)</p>
+<h3 id="费马小定理的证明"><a class="header-anchor" href="#费马小定理的证明">¶</a>费马小定理的证明</h3>
+<h4 id="举例证明"><a class="header-anchor" href="#举例证明">¶</a>举例证明</h4>
+<p>如果p是一个素数（质数），a是一个正整数且与p的最大公因数为1，那么对于数列：</p>
 <p>a, 2a, 3a, 4a, 5a, (p-1)a</p>
 <p>将每个项都除去p得出余数, 得出的结果是一个包含正整数1到p-1的数列，且每个整数都只出现一次</p>
 <p>举例,a=8,p=11,可得：</p>
-<p>8，  0*11+    8<br>16，1*11+    5<br>24，2*11+    2<br>32，2*11+    10<br>40，3*11+    7<br>48，4*11+    4<br>56，5*11+    1<br>64，5*11+    9<br>72，6*11+    6<br>80,   7*11+    3</p>
+<p>8，  0*11+    8<br>
+16，1*11+    5<br>
+24，2*11+    2<br>
+32，2*11+    10<br>
+40，3*11+    7<br>
+48，4*11+    4<br>
+56，5*11+    1<br>
+64，5*11+    9<br>
+72，6*11+    6<br>
+80,   7*11+    3</p>
 <p>可以看到，余数是打乱后的数列 1，2，3，4，5，6，7，8，9，10</p>
 <p>将数列逐项相称，a *2a *3a *4a *5a … *(p-1)a，</p>
-<p>根据乘法的交换律，其结果就等于 1 * 2 * 3 … * (p-1) （mod p）  </p>
-<p>也就是说 </p>
-<script type="math/tex; mode=display">
-a^{p-1}(p-1)! \equiv (p-1)!(\mod p)</script><p>接着根据取模的性质,两边消去（p-1），可得：</p>
-<script type="math/tex; mode=display">
-a^{p-1} \equiv 1(\mod p)</script><h4 id="串珠证明"><a href="#串珠证明" class="headerlink" title="串珠证明"></a>串珠证明</h4><p>取一个整数a,一个素数p</p>
-<p>一个珠子串共有p个珠子，每个珠子有a种颜色可能，那么这个珠子串共有a^p^种可能，</p>
-<p>从所有可能的珠子串中减去都为同样的颜色珠子串（共有a个），得到的珠子串为a^p^-a 个</p>
-<p>因为每个珠子串共p个珠子，所以a^p^-a 能够整除p</p>
-<p>也就是  </p>
-<script type="math/tex; mode=display">
-a^{p}-a (\mod p)\equiv 0</script><p>转化得</p>
-<script type="math/tex; mode=display">
-a^{p}\equiv a (\mod p)</script><script type="math/tex; mode=display">
-a^{p-1}\equiv 1 (\mod p)</script><h3 id="费马小定理解决扑克牌问题"><a href="#费马小定理解决扑克牌问题" class="headerlink" title="费马小定理解决扑克牌问题"></a>费马小定理解决扑克牌问题</h3><p>给你一副按大小顺序排好的扑克牌（52张不包括大小王），将牌平分为上下两组，取第二组的一张牌，再取第一组的一张牌，循环直至所有牌都拿完</p>
+<p>根据乘法的交换律，其结果就等于 1 * 2 * 3 … * (p-1) （mod p）</p>
+<p>也就是说<br>
+$$<br>
+a^{p-1}(p-1)! \equiv (p-1)!(\mod p)<br>
+$$<br>
+接着根据取模的性质,两边消去（p-1），可得：<br>
+$$<br>
+a^{p-1} \equiv 1(\mod p)<br>
+$$</p>
+<h4 id="串珠证明"><a class="header-anchor" href="#串珠证明">¶</a>串珠证明</h4>
+<p>取一个整数a,一个素数p</p>
+<p>一个珠子串共有p个珠子，每个珠子有a种颜色可能，那么这个珠子串共有a<sup>p</sup>种可能，</p>
+<p>从所有可能的珠子串中减去都为同样的颜色珠子串（共有a个），得到的珠子串为a<sup>p</sup>-a 个</p>
+<p>因为每个珠子串共p个珠子，所以a<sup>p</sup>-a 能够整除p</p>
+<p>也就是<br>
+$$<br>
+a^{p}-a (\mod p)\equiv 0<br>
+$$<br>
+转化得<br>
+$$<br>
+a^{p}\equiv a (\mod p)<br>
+$$</p>
+<p>$$<br>
+a^{p-1}\equiv 1 (\mod p)<br>
+$$</p>
+<h3 id="费马小定理解决扑克牌问题"><a class="header-anchor" href="#费马小定理解决扑克牌问题">¶</a>费马小定理解决扑克牌问题</h3>
+<p>给你一副按大小顺序排好的扑克牌（52张不包括大小王），将牌平分为上下两组，取第二组的一张牌，再取第一组的一张牌，循环直至所有牌都拿完</p>
 <p>再次循环上面的操作，将牌组再平分为上下两组，取第二组一张，再取第一组一张，直至取完</p>
 <p>如此循环，需要多少次循环才能使牌组重新回到顺序排好的状态呢？</p>
 <p><img src="/2021/04/03/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86%E5%92%8C%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86/www.youtube.com_watch_v=YcYmbcwmRwQ&amp;t=3312s.png" alt="www.youtube.com_watch_v=YcYmbcwmRwQ&amp;t=3312s">这里就可以用模算术，我们假设一张牌最初的位置是x</p>
 <p>很容易发现规律：经过一次洗牌后，牌的位置变成了2x(mod 53) ,比如 27*2 mod53可得1，52*2 mod53可得51</p>
-<p>那么进行n次洗牌，原本x位置的牌会变成 x<em>2^n (mod 53)，注意 x\</em>2(mod53)*2(mod53)……*2(mod53)=x*2*2……*2(mod53)</p>
+<p>那么进行n次洗牌，原本x位置的牌会变成 x* 2^n (mod 53)，注意 x *2(mod53)*2(mod53)…*2(mod53)=x*2*2…*2(mod53)</p>
 <p>要想n次洗牌后位置不变，则 x*2^n(mod53)=x</p>
-<p>等式两边消去x，得2^n(mod53)=1,变换写法就是2^n=1 (mod53)</p>
+<p>等式两边消去x，得2<sup>n(mod53)=1,变换写法就是2</sup>n=1 (mod53)</p>
 <p>也就是说找到次幂n能够使2^n-1整除53</p>
 <p>根据费马小定理，因为53是素数且和2之间没有公因数（公约数），则n=52</p>
-<h3 id="费马小定理到欧拉定理"><a href="#费马小定理到欧拉定理" class="headerlink" title="费马小定理到欧拉定理"></a>费马小定理到欧拉定理</h3><p>未完待续…</p>
-<h2 id="视频参考"><a href="#视频参考" class="headerlink" title="视频参考"></a>视频参考</h2><iframe src="//player.bilibili.com/player.html?aid=459976031&bvid=BV1t5411A7cz&cid=319894808&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-
-
-
+<h3 id="费马小定理到欧拉定理"><a class="header-anchor" href="#费马小定理到欧拉定理">¶</a>费马小定理到欧拉定理</h3>
+<p>未完待续…</p>
+<h2 id="视频参考"><a class="header-anchor" href="#视频参考">¶</a>视频参考</h2>
+<iframe src="//player.bilibili.com/player.html?aid=459976031&bvid=BV1t5411A7cz&cid=319894808&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 <p>有兴趣的小伙伴可以进入文章页面，在底部评论 &gt;_&lt;</p>
 
       
@@ -982,108 +1092,6 @@ a^{p-1}\equiv 1 (\mod p)</script><h3 id="费马小定理解决扑克牌问题"><
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://georgeguoxv.gitee.io/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/favicon-32x32.png">
-      <meta itemprop="name" content="George Guo">
-      <meta itemprop="description" content="本博客为纯静态网站">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="George的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/" class="post-title-link" itemprop="url">cpu如何工作？</a>
-        </h2>
-
-        <div class="post-meta">
-
-  
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-25 11:07:31" itemprop="dateCreated datePublished" datetime="2021-03-25T11:07:31+08:00">2021-03-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-31 20:00:08" itemprop="dateModified" datetime="2021-03-31T20:00:08+08:00">2021-03-31</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="引言：逻辑门电路"><a href="#引言：逻辑门电路" class="headerlink" title="引言：逻辑门电路"></a>引言：逻辑门电路</h1><h2 id="继电器"><a href="#继电器" class="headerlink" title="继电器"></a>继电器</h2><p>我们在初中就学习过电磁感应，线圈通电会产生磁场，利用这个磁场再去控制一个电路的开关，这就是最早的继电器</p>
-<p><img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/1616644633114.png" alt="继电器"></p>
-<p>许多继电器链接起来，就构成了有逻辑思维的电路：以下为一个与门（And Gate）</p>
-<p><img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325120531945.png" alt></p>
-<p>只有当前两个继电器都通电时，灯泡才能点亮</p>
-<p>以下是几种常见逻辑门：</p>
-<p>或门：<img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325124715228.png" alt="image-20210325124715228"></p>
-<p>非门（反向器）：<img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325124809134.png" alt="image-20210325124809134"></p>
-<p>或非门：<img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325124930571.png" alt="image-20210325124930571"></p>
-<p>以下为常见逻辑门的符号表示：</p>
-<p><img src="https://mianbaoban-assets.oss-cn-shenzhen.aliyuncs.com/2021/1/iEjEFv.png" width="200" height="400"></p>
-<h2 id="振荡器（时钟）"><a href="#振荡器（时钟）" class="headerlink" title="振荡器（时钟）"></a>振荡器（时钟）</h2><p><img align="left" width="250" height="250" src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325121220542.png"><img align="left" width="250" height="250" src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325121235648.png"></p>
-<p>当接通时，磁力使开关断开，断开后失去磁力，就会再次接通电路。时钟就会不断地开关。</p>
-<h2 id="锁存器"><a href="#锁存器" class="headerlink" title="锁存器"></a>锁存器</h2><p>这是由两个或非门构造的触发器，称为 R - S（或 R e s e t - S e t，复位/置位）触发器</p>
-<p><img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325124413190.png" alt="image-20210325124413190"></p>
-<p>闭合上边的置位开关</p>
-<p><img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325124435107.png" alt="image-20210325124435107"></p>
-<p>这是即使你再断开开关，灯泡仍然会亮着</p>
-<p><img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325153936798.png" alt="image-20210325153936798"></p>
-<p>这时闭合下边的复位开关，灯泡熄灭</p>
-<p><img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325155210783.png" alt="image-20210325155210783"></p>
-<p>触发器的电路可以简化成：<img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325155525804.png" alt="image-20210325155525804"></p>
-<p>接下来我们改进这个触发器,我们加上输出Q为零的情况</p>
-<script type="math/tex; mode=display">
-\overline{Q}</script><p><img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325155741925.png" alt="image-20210325155741925"></p>
-<p>只要保持位为0，置位信号和复位信号都不会对电路输出产生影响</p>
-<p><img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325163116367.png" alt="image-20210325163116367"></p>
-<p>这就是一个电平触发的D型锁存器了，D（Data）表示数据端输入。所谓电平触发是指当 保持位输入为某一特定电平时，触发器才对数据端的输入值进行保存</p>
-<p>(更高级的触发器！)两个R-S触发器相连接，可以组成 边沿触发的D型触发器</p>
-<p><img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325164855645.png" alt="image-20210325164855645"></p>
-<p><img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325165041642.png" alt="image-20210325165041642"></p>
-<h1 id="cpu"><a href="#cpu" class="headerlink" title="cpu"></a>cpu</h1><p>2.3Ghz的cpu就是指每秒能够进行23亿次运算的cpu。也就是时钟每秒变化23亿次。</p>
-<p>cpu从内存条（RAM）上的0地址开始运行，每次时钟跳动，就往下跳一个地址。</p>
-<p>cpu运行的视频介绍可以参考：</p>
-<iframe src="//player.bilibili.com/player.html?aid=714780405&bvid=BV1LX4y1G7sQ&cid=315113451&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width: 100%; height: 500px; max-width: 100%；align:center; padding:20px 0;"> 
-</iframe>
-<iframe src="//player.bilibili.com/player.html?aid=417304618&bvid=BV1eV411e7k3&cid=316109728&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1135,7 +1143,7 @@ a^{p-1}\equiv 1 (\mod p)</script><h3 id="费马小定理解决扑克牌问题"><
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1238,7 +1246,7 @@ jQuery(document).ready(function() {
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

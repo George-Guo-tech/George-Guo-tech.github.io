@@ -169,6 +169,108 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://georgeguoxv.gitee.io/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/favicon-32x32.png">
+      <meta itemprop="name" content="George Guo">
+      <meta itemprop="description" content="本博客为纯静态网站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="George的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/" class="post-title-link" itemprop="url">cpu如何工作？</a>
+        </h2>
+
+        <div class="post-meta">
+
+  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-25 11:07:31" itemprop="dateCreated datePublished" datetime="2021-03-25T11:07:31+08:00">2021-03-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-31 20:00:08" itemprop="dateModified" datetime="2021-03-31T20:00:08+08:00">2021-03-31</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="引言：逻辑门电路"><a href="#引言：逻辑门电路" class="headerlink" title="引言：逻辑门电路"></a>引言：逻辑门电路</h1><h2 id="继电器"><a href="#继电器" class="headerlink" title="继电器"></a>继电器</h2><p>我们在初中就学习过电磁感应，线圈通电会产生磁场，利用这个磁场再去控制一个电路的开关，这就是最早的继电器</p>
+<p><img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/1616644633114.png" alt="继电器"></p>
+<p>许多继电器链接起来，就构成了有逻辑思维的电路：以下为一个与门（And Gate）</p>
+<p><img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325120531945.png" alt></p>
+<p>只有当前两个继电器都通电时，灯泡才能点亮</p>
+<p>以下是几种常见逻辑门：</p>
+<p>或门：<img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325124715228.png" alt="image-20210325124715228"></p>
+<p>非门（反向器）：<img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325124809134.png" alt="image-20210325124809134"></p>
+<p>或非门：<img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325124930571.png" alt="image-20210325124930571"></p>
+<p>以下为常见逻辑门的符号表示：</p>
+<p><img src="https://mianbaoban-assets.oss-cn-shenzhen.aliyuncs.com/2021/1/iEjEFv.png" width="200" height="400"></p>
+<h2 id="振荡器（时钟）"><a href="#振荡器（时钟）" class="headerlink" title="振荡器（时钟）"></a>振荡器（时钟）</h2><p><img align="left" width="250" height="250" src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325121220542.png"><img align="left" width="250" height="250" src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325121235648.png"></p>
+<p>当接通时，磁力使开关断开，断开后失去磁力，就会再次接通电路。时钟就会不断地开关。</p>
+<h2 id="锁存器"><a href="#锁存器" class="headerlink" title="锁存器"></a>锁存器</h2><p>这是由两个或非门构造的触发器，称为 R - S（或 R e s e t - S e t，复位/置位）触发器</p>
+<p><img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325124413190.png" alt="image-20210325124413190"></p>
+<p>闭合上边的置位开关</p>
+<p><img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325124435107.png" alt="image-20210325124435107"></p>
+<p>这是即使你再断开开关，灯泡仍然会亮着</p>
+<p><img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325153936798.png" alt="image-20210325153936798"></p>
+<p>这时闭合下边的复位开关，灯泡熄灭</p>
+<p><img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325155210783.png" alt="image-20210325155210783"></p>
+<p>触发器的电路可以简化成：<img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325155525804.png" alt="image-20210325155525804"></p>
+<p>接下来我们改进这个触发器,我们加上输出Q为零的情况</p>
+<script type="math/tex; mode=display">
+\overline{Q}</script><p><img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325155741925.png" alt="image-20210325155741925"></p>
+<p>只要保持位为0，置位信号和复位信号都不会对电路输出产生影响</p>
+<p><img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325163116367.png" alt="image-20210325163116367"></p>
+<p>这就是一个电平触发的D型锁存器了，D（Data）表示数据端输入。所谓电平触发是指当 保持位输入为某一特定电平时，触发器才对数据端的输入值进行保存</p>
+<p>(更高级的触发器！)两个R-S触发器相连接，可以组成 边沿触发的D型触发器</p>
+<p><img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325164855645.png" alt="image-20210325164855645"></p>
+<p><img src="/2021/03/25/cpu%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%EF%BC%9F/image-20210325165041642.png" alt="image-20210325165041642"></p>
+<h1 id="cpu"><a href="#cpu" class="headerlink" title="cpu"></a>cpu</h1><p>2.3Ghz的cpu就是指每秒能够进行23亿次运算的cpu。也就是时钟每秒变化23亿次。</p>
+<p>cpu从内存条（RAM）上的0地址开始运行，每次时钟跳动，就往下跳一个地址。</p>
+<p>cpu运行的视频介绍可以参考：</p>
+<iframe src="//player.bilibili.com/player.html?aid=714780405&bvid=BV1LX4y1G7sQ&cid=315113451&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width: 100%; height: 500px; max-width: 100%；align:center; padding:20px 0;"> 
+</iframe>
+<iframe src="//player.bilibili.com/player.html?aid=417304618&bvid=BV1eV411e7k3&cid=316109728&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://georgeguoxv.gitee.io/2021/03/20/%E7%AC%94%E8%AE%B0%E6%9C%AC%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -286,7 +388,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -389,7 +491,7 @@ jQuery(document).ready(function() {
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -477,6 +579,59 @@ jQuery(document).ready(function() {
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
