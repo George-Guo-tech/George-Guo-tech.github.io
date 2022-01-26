@@ -202,7 +202,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-26 00:08:04" itemprop="dateModified" datetime="2022-01-26T00:08:04+08:00">2022-01-26</time>
+                <time title="修改时间：2022-01-26 14:09:44" itemprop="dateModified" datetime="2022-01-26T14:09:44+08:00">2022-01-26</time>
               </span>
 
           
@@ -223,10 +223,10 @@
 <p>付费语音包的使用</p>
 <h2 id="Jadx反编译，窥探APP源码，定位关键类"><a class="header-anchor" href="#Jadx反编译，窥探APP源码，定位关键类">¶</a>Jadx反编译，窥探APP源码，定位关键类</h2>
 <p>通过jadx反编译，找到应用包名，在Mainactivity里搜索关键词VIP，就找到了关键函数<code>gotoBuyVIPUI</code></p>
-<p><img src="/2022/01/25/%E5%AE%89%E5%8D%93%E9%80%86%E5%90%91%E4%B8%80%E6%AC%BE%E5%8F%98%E5%A3%B0%E5%99%A8%EF%BC%8Cfrida%E9%A6%96%E6%88%98%E5%A4%A7%E6%8D%B7/D:%5C%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%5Cblog%5Csource%5C_posts%5C%E5%AE%89%E5%8D%93%E9%80%86%E5%90%91%E4%B8%80%E6%AC%BE%E5%8F%98%E5%A3%B0%E5%99%A8%EF%BC%8Cfrida%E9%A6%96%E6%88%98%E5%A4%A7%E6%8D%B7%5Cimage-20220125234730911.png" alt="image-20220125234730911"></p>
+<p><img src="/2022/01/25/%E5%AE%89%E5%8D%93%E9%80%86%E5%90%91%E4%B8%80%E6%AC%BE%E5%8F%98%E5%A3%B0%E5%99%A8%EF%BC%8Cfrida%E9%A6%96%E6%88%98%E5%A4%A7%E6%8D%B7/image-20220125234730911.png" alt="image-20220125234730911"></p>
 <h2 id="IntelliJ-smalidea-插件，动态调试APP"><a class="header-anchor" href="#IntelliJ-smalidea-插件，动态调试APP">¶</a>IntelliJ smalidea 插件，动态调试APP</h2>
 <p>用Android killer 拆apk后，用IntelliJ打开项目。找到我们之前找到关键函数，在这下断点</p>
-<p><img src="/2022/01/25/%E5%AE%89%E5%8D%93%E9%80%86%E5%90%91%E4%B8%80%E6%AC%BE%E5%8F%98%E5%A3%B0%E5%99%A8%EF%BC%8Cfrida%E9%A6%96%E6%88%98%E5%A4%A7%E6%8D%B7/D:%5C%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%5Cblog%5Csource%5C_posts%5C%E5%AE%89%E5%8D%93%E9%80%86%E5%90%91%E4%B8%80%E6%AC%BE%E5%8F%98%E5%A3%B0%E5%99%A8%EF%BC%8Cfrida%E9%A6%96%E6%88%98%E5%A4%A7%E6%8D%B7%5Cimage-20220125235703838.png" alt="image-20220125235703838"></p>
+<p><img src="/2022/01/25/%E5%AE%89%E5%8D%93%E9%80%86%E5%90%91%E4%B8%80%E6%AC%BE%E5%8F%98%E5%A3%B0%E5%99%A8%EF%BC%8Cfrida%E9%A6%96%E6%88%98%E5%A4%A7%E6%8D%B7/image-20220125235703838.png" alt="image-20220125235703838"></p>
 <p>在APP上点击一个付费VIP才能使用的语音包，果然，在断点处停了下来。说明我们找对地方了，这个就是检测是否VIP的函数</p>
 <h2 id="改写APKsamli代码或者frida动态hook，实现vip功能的使用"><a class="header-anchor" href="#改写APKsamli代码或者frida动态hook，实现vip功能的使用">¶</a>改写APKsamli代码或者frida动态hook，实现vip功能的使用</h2>
 <p>由于对samli语法不熟悉，经过一番尝试无果</p>
@@ -1176,6 +1176,24 @@ $$</p>
         </li>
         <li class="links-of-blogroll-item">
           <a href="https://evilcos.me/" title="https:&#x2F;&#x2F;evilcos.me&#x2F;" rel="noopener" target="_blank">余弦的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.anquanke.com/post/id/226685" title="https:&#x2F;&#x2F;www.anquanke.com&#x2F;post&#x2F;id&#x2F;226685" rel="noopener" target="_blank">安全客安卓Unity逆向</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.secpulse.com/archives/132082.html" title="https:&#x2F;&#x2F;www.secpulse.com&#x2F;archives&#x2F;132082.html" rel="noopener" target="_blank">安全脉搏 firda详解</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://nanshihui.github.io/" title="https:&#x2F;&#x2F;nanshihui.github.io&#x2F;" rel="noopener" target="_blank">Sherwel-Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.daimajiaoliu.com/series/spring_basic" title="https:&#x2F;&#x2F;www.daimajiaoliu.com&#x2F;series&#x2F;spring_basic" rel="noopener" target="_blank">Spring各种代码学习大全</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.taikr.com/" title="https:&#x2F;&#x2F;www.taikr.com&#x2F;" rel="noopener" target="_blank">Unity游戏开发课程</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.2265.com/soft/282836.html" title="http:&#x2F;&#x2F;www.2265.com&#x2F;soft&#x2F;282836.html" rel="noopener" target="_blank">算法学习app</a>
         </li>
     </ul>
   </div>
