@@ -23,12 +23,12 @@
     var CONFIG = {"hostname":"georgeguoxv.gitee.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","Muse | Mist":220,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="windows本地调试器 （有更新）常用的调试器有很多，基本上所有编程语言的IDE都会带有调试的功能，python的pycharm, jupyter notebook, java的 eclipse，intelliJ, c++的visual studio Windows本地调试器（以Windbg为例）不同于编程语言的调试，Windbg调试的对象是一个程序所调用的windows操作系统的API，例如使">
+  <meta name="description" content="¶windows本地调试器 （有更新） 常用的调试器有很多，基本上所有编程语言的IDE都会带有调试的功能，python的pycharm, jupyter notebook, java的 eclipse，intelliJ, c++的visual studio Windows本地调试器（以Windbg为例）不同于编程语言的调试，Windbg调试的对象是一个程序所调用的windows操作系统的API，例">
 <meta property="og:type" content="article">
 <meta property="og:title" content="windows调试器的使用，汇编语言逆向开发">
 <meta property="og:url" content="https://georgeguoxv.gitee.io/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/index.html">
 <meta property="og:site_name" content="George的博客">
-<meta property="og:description" content="windows本地调试器 （有更新）常用的调试器有很多，基本上所有编程语言的IDE都会带有调试的功能，python的pycharm, jupyter notebook, java的 eclipse，intelliJ, c++的visual studio Windows本地调试器（以Windbg为例）不同于编程语言的调试，Windbg调试的对象是一个程序所调用的windows操作系统的API，例如使">
+<meta property="og:description" content="¶windows本地调试器 （有更新） 常用的调试器有很多，基本上所有编程语言的IDE都会带有调试的功能，python的pycharm, jupyter notebook, java的 eclipse，intelliJ, c++的visual studio Windows本地调试器（以Windbg为例）不同于编程语言的调试，Windbg调试的对象是一个程序所调用的windows操作系统的API，例">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://georgeguoxv.gitee.io/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/image-20210506182723494.png">
 <meta property="og:image" content="https://georgeguoxv.gitee.io/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/image-20210507133202708.png">
@@ -260,24 +260,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="windows本地调试器-（有更新）"><a href="#windows本地调试器-（有更新）" class="headerlink" title="windows本地调试器 （有更新）"></a>windows本地调试器 （有更新）</h2><p>常用的调试器有很多，基本上所有编程语言的IDE都会带有调试的功能，python的pycharm, jupyter notebook, java的 eclipse，intelliJ, c++的visual studio</p>
+        <h2 id="windows本地调试器-（有更新）"><a class="header-anchor" href="#windows本地调试器-（有更新）">¶</a>windows本地调试器 （有更新）</h2>
+<p>常用的调试器有很多，基本上所有编程语言的IDE都会带有调试的功能，python的pycharm, jupyter notebook, java的 eclipse，intelliJ, c++的visual studio</p>
 <p>Windows本地调试器（以Windbg为例）不同于编程语言的调试，Windbg调试的对象是一个程序所调用的windows操作系统的API，例如使用USER32!CreateWindowExA创建窗口和使用ws2_32.dll来访问网络</p>
 <p>接下来，结合编程语言的调试（源码调试）和操作系统API的调试，就能对项目进行深入的研究</p>
 <p>即便是在没有源码的情况下，windows本地调试也能给我们一些线索，帮助逆向开发</p>
-<h2 id="大佬的Github源码"><a href="#大佬的Github源码" class="headerlink" title="大佬的Github源码"></a>大佬的Github源码</h2><p><a target="_blank" rel="noopener" href="https://github.com/chengciming/wechatPc">https://github.com/chengciming/wechatPc</a></p>
-<p>下载源码，我们就可以开始了  </p>
-<p>国内可以使用gitee，一些github加速网站，以及一些github镜像网站  </p>
+<h2 id="大佬的Github源码"><a class="header-anchor" href="#大佬的Github源码">¶</a>大佬的Github源码</h2>
+<p><a target="_blank" rel="noopener" href="https://github.com/chengciming/wechatPc">https://github.com/chengciming/wechatPc</a></p>
+<p>下载源码，我们就可以开始了</p>
+<p>国内可以使用gitee，一些github加速网站，以及一些github镜像网站</p>
 <p>不想自己下载可以加群 <code>147694968</code> 求助源码</p>
 <p>将wechatPc-master.rar文件下载到本地后，解压到当前文件夹</p>
 <p><img src="/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/image-20210506182723494.png" alt></p>
 <p>wechatRobot目录内是执行注入操作的wechatRobot.exe的项目源码</p>
 <p>wechatdll目录内是需要被注入的wechatdll.dll的项目源码</p>
 <p>Bin目录是这两个项目的成品输出目录</p>
-<h2 id="步骤-演示"><a href="#步骤-演示" class="headerlink" title="步骤+演示"></a>步骤+演示</h2><h3 id="大佬的github上给出了项目的通信机制"><a href="#大佬的github上给出了项目的通信机制" class="headerlink" title="大佬的github上给出了项目的通信机制"></a>大佬的github上给出了项目的通信机制</h3><p>通讯流程：WechatDll(注入到微信) &lt;—&gt; [WS] &lt;—&gt; WechatRobot(操作界面) &lt;—&gt; [WS] &lt;—&gt; ServerPhp(服务端) &lt;—&gt; [WS] &lt;—&gt; Web(HTML操作界面)</p>
+<h2 id="步骤-演示"><a class="header-anchor" href="#步骤-演示">¶</a>步骤+演示</h2>
+<h3 id="大佬的github上给出了项目的通信机制"><a class="header-anchor" href="#大佬的github上给出了项目的通信机制">¶</a>大佬的github上给出了项目的通信机制</h3>
+<p>通讯流程：WechatDll(注入到微信) &lt;–&gt; [WS] &lt;–&gt; WechatRobot(操作界面) &lt;–&gt; [WS] &lt;–&gt; ServerPhp(服务端) &lt;–&gt; [WS] &lt;–&gt; Web(HTML操作界面)</p>
 <p>我们以此流程来进行</p>
-<h3 id="步骤0-开启微信2-8-0-121-（有更新）"><a href="#步骤0-开启微信2-8-0-121-（有更新）" class="headerlink" title="步骤0 开启微信2.8.0.121 （有更新）"></a>步骤0 开启微信2.8.0.121 （有更新）</h3><p>如图</p>
+<h3 id="步骤0-开启微信2-8-0-121-（有更新）"><a class="header-anchor" href="#步骤0-开启微信2-8-0-121-（有更新）">¶</a>步骤0 开启微信2.8.0.121 （有更新）</h3>
+<p>如图</p>
 <p><img src="/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/image-20210507133202708.png" alt="image-20210507133202708"></p>
-<p>如果你打开2.8.0.121被要求强制升级，先将安装2.6版微信并登录一次，再安装2.8。（方法仅供参考）<br>如果点击登录并扫码后提示“你的微信版本过低”。可以从我的github <a target="_blank" rel="noopener" href="https://github.com/George-Guo-tech/wechatPc">https://github.com/George-Guo-tech/wechatPc</a> 下载带防更新补丁的更新版，或自己尝试如下：<img src="/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/image-20210708161437476.png" alt="image-20210708161437476"></p>
+<p>如果你打开2.8.0.121被要求强制升级，先将安装2.6版微信并登录一次，再安装2.8。（方法仅供参考）<br>
+如果点击登录并扫码后提示“你的微信版本过低”。可以从我的github <a target="_blank" rel="noopener" href="https://github.com/George-Guo-tech/wechatPc">https://github.com/George-Guo-tech/wechatPc</a> 下载带防更新补丁的更新版，或自己尝试如下：<img src="/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/image-20210708161437476.png" alt="image-20210708161437476"></p>
 <p>这时我们打开 procexp.exe ，没有的话到微软官方网站下载sysinternals工具包</p>
 <p><img src="/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/image-20210507134844407.png" alt="image-20210507134844407">点击那个准星，拖到打开的微信的窗口上，它就自动帮我们定位到了进程，可以看到进程ID是11368</p>
 <p>接下来打开windbg</p>
@@ -289,7 +295,8 @@
 <p>我们甚至可以看到有一个叫<code>StartWachat</code>的函数</p>
 <p>输入命令<code>lmDvmWeChatwin</code>，我们可以看到公司名字是腾讯<img src="/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/image-20210507140906143.png" alt="image-20210507140906143"></p>
 <p>输入<code>lmDvmWeChatdll</code>，会发现什么都没有，这是因为我们还没有注入我们的wechatdll.dll</p>
-<h3 id="步骤1-开启php服务端和web端"><a href="#步骤1-开启php服务端和web端" class="headerlink" title="步骤1 开启php服务端和web端"></a>步骤1 开启php服务端和web端</h3><p>首先介绍这个项目的结构和功能，这个项目的根本功能是：在web端（web目录下的index.html）里我们的所有操作都能转化成微信exe进程的操作。</p>
+<h3 id="步骤1-开启php服务端和web端"><a class="header-anchor" href="#步骤1-开启php服务端和web端">¶</a>步骤1 开启php服务端和web端</h3>
+<p>首先介绍这个项目的结构和功能，这个项目的根本功能是：在web端（web目录下的index.html）里我们的所有操作都能转化成微信exe进程的操作。</p>
 <p>每当我们在web端点击新开一个微信并且登录进去，php服务端（相当于一个ws服务器）以及hook端（wechatRobot.exe）就将这个微信账号和一个微信的exe进程相联系起来。具体的实现方法是将web端发送的ws（websocket， 不懂请看我关于websocket的文章）操作指令包转发给微信exe进程，从而实现在web端控制exe。</p>
 <p>php服务端会一直检测当前的web进程以及wechatrobot.exe进程,将所有web端的操作和消息转发给wechatrobot.exe,wechatrobot.exe验证web端身份后将消息发给对应的微信exe</p>
 <p>首先开启php服务端（index.php），这需要装有compser的php环境，要么自己安装php和composer,</p>
@@ -300,7 +307,8 @@
 <p>这时我们打开Web目录里的index.html，会看到<img src="/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/image-20210506195438059.png" alt="image-20210506195438059">服务端已经发现了这个web端，并赋予这个web端id为1</p>
 <p>这时我们在web端点击绿色微信图标，点击新开一个<img src="/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/image-20210506195830487.png" alt="image-20210506195830487">红色的提示意思是没有发现在线的微信，这是因为我们还没有将hook端连接到服务器</p>
 <span id="more"></span>
-<h3 id="步骤2-hook端连接web端"><a href="#步骤2-hook端连接web端" class="headerlink" title="步骤2 hook端连接web端"></a>步骤2 hook端连接web端</h3><p>打开hook端（Bin/Debug或Release目录下的wechatRobot.exe）,为了更清楚的了解wechatRobot.exe的作用，我们不仅要打开，还要调试这个程序。这就需要我们在Visual Studio中，打开WechatRobot目录里的wechatRobot.sln</p>
+<h3 id="步骤2-hook端连接web端"><a class="header-anchor" href="#步骤2-hook端连接web端">¶</a>步骤2 hook端连接web端</h3>
+<p>打开hook端（Bin/Debug或Release目录下的wechatRobot.exe）,为了更清楚的了解wechatRobot.exe的作用，我们不仅要打开，还要调试这个程序。这就需要我们在Visual Studio中，打开WechatRobot目录里的wechatRobot.sln</p>
 <p>我们可以看到wechatrobot.cpp里开启了两个线程，一个是连接微信exe的ws，一个是连接web服务端的ws，按住ctrl点击WebSocketMonitor,我们就能进入到这个函数<img src="/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/image-20210506203455919.png" alt="image-20210506203455919">可以看到，这个函数又调用了一个叫WsServerint()的函数，我们再ctrl+左键点进去</p>
 <p>看到这里又调用了一个叫WsServerListen的函数，我们同样点进去</p>
 <p>这时就看到这里有一个对ws的监听函数，鼠标放在这个常量上，就知道了这个程序所使用的端口是6789</p>
@@ -321,7 +329,8 @@
 <p>我们直接继续让wechatRobot运行起来，就可以看到 transit wechat message：（意思就是：中转来自wechat的消息），仔细观察这一大串日志，<img src="/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/image-20210506222215890.png" alt="image-20210506222215890">我们发现<code>&quot;timestamp&quot;:&quot;1620368375566&quot;,&quot;wechatId&quot;:null,&quot;opCode&quot;:0</code>，这里的timestamp是unix时间戳，opcode代表的操作码在 opCode.h 中，如下图：，我们只需要注意wechatid，这里的 null 代表没有<img src="/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/image-20210507142703483.png" alt="image-20210507142703483"></p>
 <p>也就是说我们还没有将wechatRobot.exe和微信exe进程连接起来，这时我们需要再次点击新开一个，不过在此之前，先找到下图下断点<img src="/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/image-20210507145439018.png" alt="image-20210507145439018">之后我们点击新开一个，断点就断在这个位置，我们在Locals找data的值，找不到的话如图：<img src="/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/image-20210507145601653.png" alt="image-20210507145601653">点击放大镜查看，我们发现一个wechatid发送了操作指令16。<img src="/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/image-20210507145752578.png" alt="image-20210507145752578"></p>
 <p>还记得指令16是什么吗？十进制的16就是十六进制的10，也就是新开一个微信客户端命令<img src="/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/image-20210507151056017.png" alt="image-20210507151056017">也就是说，WeChatRobot成功接收到web端的指令了</p>
-<h3 id="步骤3-hook端连接微信exe程序"><a href="#步骤3-hook端连接微信exe程序" class="headerlink" title="步骤3 hook端连接微信exe程序"></a>步骤3 hook端连接微信exe程序</h3><p>继续执行wechatRobot，我们又遇到一个断点，是我们最开始在InjectDLL下的断点，我们可以看到这里hook端启动了一个新的微信exe</p>
+<h3 id="步骤3-hook端连接微信exe程序"><a class="header-anchor" href="#步骤3-hook端连接微信exe程序">¶</a>步骤3 hook端连接微信exe程序</h3>
+<p>继续执行wechatRobot，我们又遇到一个断点，是我们最开始在InjectDLL下的断点，我们可以看到这里hook端启动了一个新的微信exe</p>
 <p><img src="/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/image-20210507152408184.png" alt="image-20210507152408184">这时我们看一下locals里 pi.dwProcessId的值为11488，还记得我们的微信PID是11368<img src="/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/image-20210507152618881.png" alt="image-20210507152618881">所以这里我们需要双击Value栏，把dwProcessID改成11368，也就是让hook端hook正在运行的微信exe，而不是如图（11488的微信exe）<img src="/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/image-20210507153059775.png" alt="image-20210507153059775">修改后，再次运行wechatRobot。这时就已经将dll注入到了PID11368微信exe，这个dll会不停的监控微信exe的活动并转发给WechatRobot</p>
 <p>我们的微信还在windbg中暂停状态，在windbg中输入<code>qd</code>命令，就会退出debug但保留exe进程</p>
 <p>在我们<code>qd</code>之前，先在图示WebsocketListen.cpp文件中ctrl+F搜索关键词”接收“，这就是WechatRobot处理dll转发来的数据的函数，我们在第254行下断点!<img src="/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/image-20210506201907881.png"> </p>
@@ -333,17 +342,11 @@
 <p>找到对应的操作码后我们发现这是把二维码发送给web端，接着我们按F11进入WsServerRecvCallback函数，再按F10一句一句一直运行到第90行，<img src="/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/image-20210507164307350.png" alt="image-20210507164307350">然后点击command window，输入<code>? (char *)json</code>回车<img src="/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/image-20210507164222087.png" alt="image-20210507164222087"></p>
 <p>然后F10，就会发现php直接就接收到了一模一样的消息，而且在二维码在web端也已经显示了出来。如果你在websocket.js 第356行 下了断点，你会发现这是因为网页端收到了php转发来的二维码消息，<img src="/2021/05/06/windows%E8%B0%83%E8%AF%95%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91%E5%BC%80%E5%8F%91/image-20210507172250461.png" alt="image-20210507172250461"></p>
 <p>现在我们已经实现了从微信exe到web端的消息通信，现在只需要在VS里继续运行wechatRobt，在windbg里继续运行微信exe程序，所有作者项目里实现的功能就都能够使用了，<a target="_blank" rel="noopener" href="https://github.com/chengciming/wechatPc/blob/master/WechatDll/WechatDll/WechatOffset.h">已实现hook的功能</a></p>
-<h3 id="步骤4-开始调试wechatdll，进行二次开发"><a href="#步骤4-开始调试wechatdll，进行二次开发" class="headerlink" title="步骤4 开始调试wechatdll，进行二次开发"></a>步骤4 开始调试wechatdll，进行二次开发</h3><p>打开VS，打开wechatdll.sln，选择调试 —附加到进程— 选择已经注入dll的微信exe进程 </p>
+<h3 id="步骤4-开始调试wechatdll，进行二次开发"><a class="header-anchor" href="#步骤4-开始调试wechatdll，进行二次开发">¶</a>步骤4 开始调试wechatdll，进行二次开发</h3>
+<p>打开VS，打开wechatdll.sln，选择调试 --附加到进程-- 选择已经注入dll的微信exe进程</p>
 <p>即可</p>
-<h2 id="直接从Web端操作的另一种方法"><a href="#直接从Web端操作的另一种方法" class="headerlink" title="直接从Web端操作的另一种方法"></a>直接从Web端操作的另一种方法</h2><details><summary>视频演示</summary><iframe src="//player.bilibili.com/player.html?aid=332948257&bvid=BV12A41137Aj&cid=335135293&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe></details>
-
-
-
-
-
-
-
-
+<h2 id="直接从Web端操作的另一种方法"><a class="header-anchor" href="#直接从Web端操作的另一种方法">¶</a>直接从Web端操作的另一种方法</h2>
+<details><summary>视频演示</summary><iframe src="//player.bilibili.com/player.html?aid=332948257&bvid=BV12A41137Aj&cid=335135293&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe></details>
 
     </div>
 
