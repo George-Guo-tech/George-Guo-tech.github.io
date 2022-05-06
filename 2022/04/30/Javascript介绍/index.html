@@ -26,19 +26,26 @@
     var CONFIG = {"hostname":"georgeguoxv.gitee.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","Muse | Mist":220,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="静态博客">
+  <meta name="description" content="¶编译型语言的特点 c ,  c++ ， 打包成操作系统机器码，然后再执行 ¶解释型语言的特点 Javascript，一边编译成机器码一边执行 ¶V8引擎 V8引擎是谷歌浏览器和NodeJS内置的 Javascript引擎 比如你在一个网页中加载一个calc.js文件，如图： 这个文件里的每个字节都会被转化成符号，比如ASCII或者UTF-8字节谷歌浏览器会识别这些关键词符号，直至将文件读取完毕">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python数据分析师，Excel自动化">
-<meta property="og:url" content="https://georgeguoxv.gitee.io/2021/08/12/python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%88%EF%BC%8CExcel%E8%87%AA%E5%8A%A8%E5%8C%96/index.html">
+<meta property="og:title" content="Javascript介绍">
+<meta property="og:url" content="https://georgeguoxv.gitee.io/2022/04/30/Javascript%E4%BB%8B%E7%BB%8D/index.html">
 <meta property="og:site_name" content="George的博客">
-<meta property="og:description" content="静态博客">
+<meta property="og:description" content="¶编译型语言的特点 c ,  c++ ， 打包成操作系统机器码，然后再执行 ¶解释型语言的特点 Javascript，一边编译成机器码一边执行 ¶V8引擎 V8引擎是谷歌浏览器和NodeJS内置的 Javascript引擎 比如你在一个网页中加载一个calc.js文件，如图： 这个文件里的每个字节都会被转化成符号，比如ASCII或者UTF-8字节谷歌浏览器会识别这些关键词符号，直至将文件读取完毕">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-08-12T12:33:31.000Z">
-<meta property="article:modified_time" content="2021-08-12T12:33:31.840Z">
+<meta property="og:image" content="https://georgeguoxv.gitee.io/2022/04/30/Javascript%E4%BB%8B%E7%BB%8D/D:%5C%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%5Cblog%5Csource_posts%5CJavascript%E4%BB%8B%E7%BB%8D%5Cimage-20220501212609819.png">
+<meta property="og:image" content="https://georgeguoxv.gitee.io/2022/04/30/Javascript%E4%BB%8B%E7%BB%8D/D:%5C%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%5Cblog%5Csource_posts%5CJavascript%E4%BB%8B%E7%BB%8D%5Cimage-20220501212604289.png">
+<meta property="og:image" content="https://georgeguoxv.gitee.io/2022/04/30/Javascript%E4%BB%8B%E7%BB%8D/D:%5C%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%5Cblog%5Csource_posts%5CJavascript%E4%BB%8B%E7%BB%8D%5Cimage-20220501213009153.png">
+<meta property="og:image" content="https://georgeguoxv.gitee.io/2022/04/30/Javascript%E4%BB%8B%E7%BB%8D/D:%5C%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%5Cblog%5Csource_posts%5CJavascript%E4%BB%8B%E7%BB%8D%5Cimage-20220501213141154.png">
+<meta property="og:image" content="https://georgeguoxv.gitee.io/2022/04/30/Javascript%E4%BB%8B%E7%BB%8D/D:%5C%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%5Cblog%5Csource_posts%5CJavascript%E4%BB%8B%E7%BB%8D%5Cimage-20220501213318435.png">
+<meta property="og:image" content="https://georgeguoxv.gitee.io/2022/04/30/Javascript%E4%BB%8B%E7%BB%8D/D:%5C%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%5Cblog%5Csource_posts%5CJavascript%E4%BB%8B%E7%BB%8D%5Cimage-20220501214321900.png">
+<meta property="article:published_time" content="2022-04-30T03:22:01.000Z">
+<meta property="article:modified_time" content="2022-05-01T14:24:22.105Z">
 <meta property="article:author" content="George Guo">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://georgeguoxv.gitee.io/2022/04/30/Javascript%E4%BB%8B%E7%BB%8D/D:%5C%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%5Cblog%5Csource_posts%5CJavascript%E4%BB%8B%E7%BB%8D%5Cimage-20220501212609819.png">
 
-<link rel="canonical" href="https://georgeguoxv.gitee.io/2021/08/12/python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%88%EF%BC%8CExcel%E8%87%AA%E5%8A%A8%E5%8C%96/">
+<link rel="canonical" href="https://georgeguoxv.gitee.io/2022/04/30/Javascript%E4%BB%8B%E7%BB%8D/">
 
 
 <script id="page-configurations">
@@ -51,7 +58,7 @@
   };
 </script>
 
-  <title>python数据分析师，Excel自动化 | George的博客</title>
+  <title>Javascript介绍 | George的博客</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2HEN8EC1YH"></script>
     <script>
@@ -175,7 +182,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://georgeguoxv.gitee.io/2021/08/12/python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%88%EF%BC%8CExcel%E8%87%AA%E5%8A%A8%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="https://georgeguoxv.gitee.io/2022/04/30/Javascript%E4%BB%8B%E7%BB%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/favicon-32x32.png">
@@ -188,7 +195,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          python数据分析师，Excel自动化
+          Javascript介绍
         </h1>
 
         <div class="post-meta">
@@ -200,8 +207,15 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-08-12 20:33:31" itemprop="dateCreated datePublished" datetime="2021-08-12T20:33:31+08:00">2021-08-12</time>
+              <time title="创建时间：2022-04-30 11:22:01" itemprop="dateCreated datePublished" datetime="2022-04-30T11:22:01+08:00">2022-04-30</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-01 22:24:22" itemprop="dateModified" datetime="2022-05-01T22:24:22+08:00">2022-05-01</time>
+              </span>
 
           
 
@@ -214,7 +228,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h2 id="编译型语言的特点"><a class="header-anchor" href="#编译型语言的特点">¶</a>编译型语言的特点</h2>
+<p>c ,  c++ ， 打包成操作系统机器码，然后再执行</p>
+<h2 id="解释型语言的特点"><a class="header-anchor" href="#解释型语言的特点">¶</a>解释型语言的特点</h2>
+<p>Javascript，一边编译成机器码一边执行</p>
+<h2 id="V8引擎"><a class="header-anchor" href="#V8引擎">¶</a>V8引擎</h2>
+<p>V8引擎是谷歌浏览器和NodeJS内置的 Javascript引擎</p>
+<p>比如你在一个网页中加载一个calc.js文件，如图：<img src="/2022/04/30/Javascript%E4%BB%8B%E7%BB%8D/D:%5C%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%5Cblog%5Csource_posts%5CJavascript%E4%BB%8B%E7%BB%8D%5Cimage-20220501212609819.png" alt="D:\个人博客\blog\source_posts\Javascript介绍\image-20220501212609819"></p>
+<p>这个文件里的每个字节都会被转化成符号，比如ASCII或者UTF-8字节<img src="/2022/04/30/Javascript%E4%BB%8B%E7%BB%8D/D:%5C%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%5Cblog%5Csource_posts%5CJavascript%E4%BB%8B%E7%BB%8D%5Cimage-20220501212604289.png" alt="D:\个人博客\blog\source_posts\Javascript介绍\image-20220501212604289">谷歌浏览器会识别这些关键词符号，直至将文件读取完毕</p>
+<p><img src="/2022/04/30/Javascript%E4%BB%8B%E7%BB%8D/D:%5C%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%5Cblog%5Csource_posts%5CJavascript%E4%BB%8B%E7%BB%8D%5Cimage-20220501213009153.png" alt="D:\个人博客\blog\source_posts\Javascript介绍\image-20220501213009153">然后检查语法并生成抽象树<img src="/2022/04/30/Javascript%E4%BB%8B%E7%BB%8D/D:%5C%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%5Cblog%5Csource_posts%5CJavascript%E4%BB%8B%E7%BB%8D%5Cimage-20220501213141154.png" alt="D:\个人博客\blog\source_posts\Javascript介绍\image-20220501213141154"></p>
+<p>之后交给V8引擎的ignition解释器，生成字节码</p>
+<p><img src="/2022/04/30/Javascript%E4%BB%8B%E7%BB%8D/D:%5C%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%5Cblog%5Csource_posts%5CJavascript%E4%BB%8B%E7%BB%8D%5Cimage-20220501213318435.png" alt="D:\个人博客\blog\source_posts\Javascript介绍\image-20220501213318435"></p>
+<p>ignition解释器然后会运行这些字节码，转化成cpu运行的机器码</p>
+<p>对于一些被调用多次的函数，turbofan优化器会存留之前生成的机器码，跳过解释直接运行机器码，啊v要注意函数的参数个数，类型一定要是一样的<img src="/2022/04/30/Javascript%E4%BB%8B%E7%BB%8D/D:%5C%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%5Cblog%5Csource_posts%5CJavascript%E4%BB%8B%E7%BB%8D%5Cimage-20220501214321900.png" alt="D:\个人博客\blog\source_posts\Javascript介绍\image-20220501214321900"></p>
+<h2 id="致谢"><a class="header-anchor" href="#致谢">¶</a>致谢</h2>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=p-iiEDtpy6I&amp;t=634s">https://www.youtube.com/watch?v=p-iiEDtpy6I&amp;t=634s</a></p>
+<p><a target="_blank" rel="noopener" href="https://dev.to/lydiahallie/javascript-visualized-the-javascript-engine-4cdf">https://dev.to/lydiahallie/javascript-visualized-the-javascript-engine-4cdf</a></p>
+
     </div>
 
     
@@ -249,12 +279,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/08/02/html5%E8%B5%9B%E5%B0%94%E5%8F%B7%E5%90%AF%E8%88%AA%E8%84%9A%E6%9C%AC%E5%88%B6%E4%BD%9C/" rel="prev" title="html5赛尔号启航脚本制作">
-      <i class="fa fa-chevron-left"></i> html5赛尔号启航脚本制作
+    <a href="/2022/04/23/%E7%8E%AF%E5%BD%A2%E8%BF%90%E5%8A%A8%E5%91%A8%E6%9C%9F/" rel="prev" title="">
+      <i class="fa fa-chevron-left"></i> 
     </a></div>
       <div class="post-nav-item">
-    <a href="/2022/01/25/%E5%AE%89%E5%8D%93%E9%80%86%E5%90%91%E4%B8%80%E6%AC%BE%E5%8F%98%E5%A3%B0%E5%99%A8%EF%BC%8Cfrida%E9%A6%96%E6%88%98%E5%A4%A7%E6%8D%B7/" rel="next" title="安卓逆向一款变声器，frida首战告捷">
-      安卓逆向一款变声器，frida首战告捷 <i class="fa fa-chevron-right"></i>
+    <a href="/2022/05/05/MIT-801/" rel="next" title="MIT_801">
+      MIT_801 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -302,6 +332,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%9E%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">编译型语言的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E9%87%8A%E5%9E%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">解释型语言的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#V8%E5%BC%95%E6%93%8E"><span class="nav-number">3.</span> <span class="nav-text">V8引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%B4%E8%B0%A2"><span class="nav-number">4.</span> <span class="nav-text">致谢</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
